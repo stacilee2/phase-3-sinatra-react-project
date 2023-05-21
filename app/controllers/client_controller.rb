@@ -1,5 +1,5 @@
-class ApplicationController < Sinatra::Base
-  set :default_content_type, 'application/json'
+class ClientController < Sinatra::Base
+    set :default_content_type, 'application/json'
 
   get "/client" do 
     clients = Client.all
@@ -16,10 +16,5 @@ class ApplicationController < Sinatra::Base
     client.destroy
     client.to_json
   end
-
-  get "/therapist" do
-    therapists = Therapist.all
-    therapists.to_json
-  end
-
+  
 end
