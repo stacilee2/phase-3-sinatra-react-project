@@ -1,3 +1,3 @@
 class Client < ActiveRecord::Base
-    belongs_to :therapist
+    belongs_to :location
 end
