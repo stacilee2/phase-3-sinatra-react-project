@@ -3,38 +3,29 @@ class LocationsController < ApplicationController
 
     get '/locations' do
         locations = Location.all
-        location_to_json
+        locations.to_json(include: :clients)
     end
 
     get '/locations/:id' do
-        find_location
-        location_to_json
+        @location = Location.find_by_id(params["id"])
+        @location.to_json(include: :clients)
     end
 
-    post '/locations' do
-        @location = Location.create(params)
-        location_to_json
+    post '/locations/:location_id/clients' do
+        @location = Location.find_by_id(params["id"])
+        @client = Client.create(params)
+        @client.to_json
     end
 
     patch '/locations/:id' do
-        find_location
+        @location = Location.find_by_id(params["id"])
         location_to_json
     end
 
-    delete '/locations/:id' do
-        find_location
-        @location.destroy
-        @location.to_json
-    end
-
-    private
-        def find_location
-            @location = Location.find_by_id(params["id"])
-        end
-
-        def location_to_json
-            @location.to_json(include: :clients)
-        end
+    delete '/locations/:location_id/clients' do
+        @location = Location.find_by_id(params["id"])
+        @client.destroy
+        @client.to_json
     end
 
 end
