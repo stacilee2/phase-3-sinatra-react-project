@@ -3,7 +3,7 @@ class ClientsController < ApplicationController
 
     get '/clients' do 
         clients = Client.all
-        clients.to_json
+        clients.to_json(include: :location)
     end
 
     get 'clients/:id' do
@@ -23,9 +23,9 @@ class ClientsController < ApplicationController
     end
 
     patch '/clients/:id' do
-        @client = Client.find_by_id(params["id"])
-        @client.update(params)
-        @client.to_json
+        client = Client.find(params[:id])
+        client.update(params)
+        client.to_json
     end
 
     delete '/clients/:id' do

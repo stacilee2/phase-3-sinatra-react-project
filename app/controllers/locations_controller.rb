@@ -17,15 +17,21 @@ class LocationsController < ApplicationController
         @client.to_json
     end
 
-    patch '/locations/:id' do
-        @location = Location.find_by_id(params["id"])
-        location_to_json
+    post '/locations' do
+        location = Location.create(params)
+        location.to_json
     end
 
-    delete '/locations/:location_id/clients' do
-        @location = Location.find_by_id(params["id"])
-        @client.destroy
-        @client.to_json
-    end
+    # patch '/locations/:id' do
+    #     @location = Location.find_by_id(params["id"])
+    #     @location.update(params)
+    #     @location.to_json
+    # end
+
+    # delete '/locations/:id' do
+    #     @location = Location.find_by_id(params["id"])
+    #     @location.destroy
+    #     @location.to_json
+    # end
 
 end
