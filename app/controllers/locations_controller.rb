@@ -28,10 +28,10 @@ class LocationsController < ApplicationController
     #     @location.to_json
     # end
 
-    # delete '/locations/:id' do
-    #     @location = Location.find_by_id(params["id"])
-    #     @location.destroy
-    #     @location.to_json
-    # end
+    delete '/locations/:id' do
+        @location = Location.find_by_id(params["id"])
+        @location.destroy
+        @location.to_json
+    end
 
 end
