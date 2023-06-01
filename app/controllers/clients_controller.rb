@@ -6,12 +6,12 @@ class ClientsController < ApplicationController
         clients.to_json(include: :location)
     end
 
-    get 'clients/:id' do
-        @client = Client.find_by_id(params["id"])
+    get '/clients/:id' do
+        client = Client.find(params[:id])
         client.to_json
     end
 
-    post '/clients' do
+    post '/locations/:location_id/clients' do
         client = Client.create(
             name: params[:name],
             age: params[:age],
@@ -29,9 +29,10 @@ class ClientsController < ApplicationController
     end
 
     delete '/clients/:id' do
-        @client = Client.find_by_id(params["id"])
-        @client.destroy
-        @client.to_json
+        client = Client.find_by_id(params["id"])
+        client.destroy
+        client.to_json
     end
 
 end
+
